@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 22:20:49 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/05/20 12:37:16 by pnoronha         ###   ########.fr       */
+/*   Created: 2022/05/25 21:07:43 by pnoronha          #+#    #+#             */
+/*   Updated: 2022/05/26 01:05:56 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <unistd.h>
+# include <sys/time.h>
 
 enum e_boolean
 {
@@ -25,17 +27,17 @@ enum e_boolean
 
 typedef struct s_data
 {
-	int	num_philo;
-	int	num_forks;
-	int	die_time;
+	int	philo_num;
+	int	forks_num;
+	int	meals_num;
 	int	eat_time;
 	int	slp_time;
-	int	num_meal;
+	int	thk_time;
+	int	die_time;
 }	t_data;
 
-t_data	*data(void);
+int	input_parse(int argc, char **argv, t_data *data);
 
-void	parsing(int argc, char **argv);
-int		ft_atoi(const char *ptr);
+int	ft_atoi(const char *ptr);
 
-#endif /* PHILO_H */
+#endif /* PHILO-H */

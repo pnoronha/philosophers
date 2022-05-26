@@ -5,45 +5,39 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/18 22:20:54 by pnoronha          #+#    #+#              #
-#    Updated: 2022/05/20 13:05:23 by pnoronha         ###   ########.fr        #
+#    Created: 2022/05/25 21:10:58 by pnoronha          #+#    #+#              #
+#    Updated: 2022/05/26 01:06:29 by pnoronha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	philo
+NAME	=	philo
 
-CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
-RM			=	rm -f
+SRC_DIR	=	sources
 
-SRC			=	main.c	\
-				parse.c	\
-				utils.c
+SRCS	=	main.c				\
+			utils.c				\
+			args_treatment.c
 
-OBJ			:=	$(SRC:%.c=%.o)
+OBJS	=	$(SRCS:.c=.o)
 
-all:		$(NAME)
+CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address
 
-$(NAME):	$(OBJ)
-		@$(CC) $(CFLAGS) $(^) -o $(@)
+all: $(NAME)
 
-%.o: %.c
-		@$(CC) $(CFLAGS) -c $(^) -o $(@)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(^) -o $(@)
+	@echo "\033[7;1;3;32m>> Philosophers Compiled <<\n\033[m"
 
-norm:
-		@norminette -R CheckForbiddenSourceHeader $(SRC)
-		@norminette -R CheckDefine
-
-test:
-		valgrind --tool=memcheck --leak-check=yes --show-reachable=yes \
-		--num-callers=20 --track-fds=yes ./$(NAME)
+%.o:	%.c
+	@$(CC) $(CFLAGS) -c $(^) -o $(@)
 
 clean:
-		@$(RM) $(OBJ)
+	@rm $(OBJS)
 
-fclean:		clean
-		@$(RM) $(NAME)
+fclean: clean
+	@rm $(NAME)
 
-re:			fclean all
+re: fclean all
 
-.PHONY : 	all clean fclean re norm test
+.PHONY: all clean fclean re
