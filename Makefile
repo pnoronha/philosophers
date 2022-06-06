@@ -6,7 +6,7 @@
 #    By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 21:10:58 by pnoronha          #+#    #+#              #
-#    Updated: 2022/05/26 01:06:29 by pnoronha         ###   ########.fr        #
+#    Updated: 2022/06/01 22:23:22 by pnoronha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,10 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -c $(^) -o $(@)
 
 clean:
-	@rm $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
-	@rm $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 
